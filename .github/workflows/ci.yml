@@ -37,7 +37,8 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         
         
-    - uses: jfrog/setup-jfrog-cli@v3
+    - name: Declare Jfrog
+      uses: jfrog/setup-jfrog-cli@v3
       env:
         JF_URL: https://danpar.jfrog.io
         JF_USER: admin
