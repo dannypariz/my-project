@@ -35,4 +35,13 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        
+        
+    - uses: jfrog/setup-jfrog-cli@v3
+      env:
+        JF_URL: https://danpar.jfrog.io
+        JF_USER: admin
+        JF_PASSWORD: Nbv123!@#
+        
+    - run: jf rt ping
          
