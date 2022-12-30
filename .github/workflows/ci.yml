@@ -42,9 +42,20 @@ jobs:
         JF_USER: ${{ secrets.JF_USER }}
         JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
-    - run: |
+    - name: Collect
+      run: |
         jf rt ping
-        jf rt build-collect-env githubactions 1
-        jf rt build-add-dependencies githubactions 1 ./
-        jf rt build-add-git githubactions 1
-        jf rt build-publish githubactions 1
+        jf rt build-collect-env ${{ JFROG_CLI_BUILD_NAME  }} ${{ JFROG_CLI_BUILD_NUMBER  }} 
+        jf rt build-add-dependencies ${{ JFROG_CLI_BUILD_NAME  }} ${{ JFROG_CLI_BUILD_NUMBER  }}  ./
+        jf rt build-add-git ${{ JFROG_CLI_BUILD_NAME  }} ${{ JFROG_CLI_BUILD_NUMBER  }} 
+        
+    - name: Deploy
+      run: |
+        jf rt jf rt u '(*).tgz' spring-libs-release/ --recursive=false
+        
+    - name: Publish
+      run: |
+        jf rt build-publish ${{ JFROG_CLI_BUILD_NAME  }} ${{ JFROG_CLI_BUILD_NUMBER  }} 
+        
+        
+        
