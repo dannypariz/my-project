@@ -21,6 +21,13 @@ jobs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      
+    - name: Declare Jfrog
+      uses: jfrog/setup-jfrog-cli@v3
+      env:
+        JF_URL: ${{ secrets.JF_URL }}
+        JF_USER: ${{ secrets.JF_USER }}
+        JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
     - name: Config with Gradle
       run: jf gradlec --repo-resolve spring-libs-release --repo-deploy spring-libs-release
@@ -29,7 +36,7 @@ jobs:
       run: jf gradle clean test
       
     - name: Build with Gradle
-      run: jf gradle clean artifactoryPublish -b build.gradle
+      run: jf gradle clean artifactoryPublish
 
 #    - name: Build and Push Docker Image
 #      uses: mr-smithers-excellent/docker-build-push@v4
@@ -41,12 +48,7 @@ jobs:
 #        password: ${{ secrets.DOCKER_PASSWORD }}
         
         
-    - name: Declare Jfrog
-      uses: jfrog/setup-jfrog-cli@v3
-      env:
-        JF_URL: ${{ secrets.JF_URL }}
-        JF_USER: ${{ secrets.JF_USER }}
-        JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
+
 
     - name: Collect
       run: |
