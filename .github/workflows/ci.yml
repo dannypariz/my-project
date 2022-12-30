@@ -32,23 +32,11 @@ jobs:
     - name: Config with Gradle
       run: jf gradlec --repo-resolve spring-libs-release --repo-deploy spring-libs-release
 
-    - name: Test with Gradle
-      run: jf gradle clean test
+#    - name: Test with Gradle
+#      run: jf gradle clean test
       
     - name: Build with Gradle
       run: jf gradle clean artifactoryPublish
-
-#    - name: Build and Push Docker Image
-#      uses: mr-smithers-excellent/docker-build-push@v4
-#      with:
-#        image: demo-app/my-project
-#        tags: v1
-#        registry: danpar.jfrog.io
-#        username: ${{ secrets.DOCKER_USERNAME }}
-#        password: ${{ secrets.DOCKER_PASSWORD }}
-        
-        
-
 
     - name: Collect
       run: |
