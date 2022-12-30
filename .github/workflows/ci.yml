@@ -22,8 +22,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    - name: Config with Gradle
+      run: jf gradlec --repo-resolve spring-libs-release --repo-deploy spring-libs-release
+
+    - name: Test with Gradle
+      run: jf gradle clean test
+      
     - name: Build with Gradle
-      run: ./gradlew build
+      run: jf gradle clean artifactoryPublish -b build.gradle
 
 #    - name: Build and Push Docker Image
 #      uses: mr-smithers-excellent/docker-build-push@v4
@@ -48,10 +54,6 @@ jobs:
         jf rt build-collect-env
         jf rt build-add-dependencies  ./
         jf rt build-add-git
-        
-    - name: Deploy
-      run: |
-        jf rt u "(*).(*)" spring-libs-release/ --recursive=false
         
     - name: Publish
       run: |
