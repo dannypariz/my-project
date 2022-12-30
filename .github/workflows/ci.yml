@@ -51,7 +51,7 @@ jobs:
         
     - name: Deploy
       run: |
-        jf rt jf rt u '(*).tgz' spring-libs-release/ --recursive=false
+        jf rt u '(*).tgz' spring-libs-release/ --recursive=false
         
     - name: Publish
       run: |
