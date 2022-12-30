@@ -45,9 +45,9 @@ jobs:
     - name: Collect
       run: |
         jf rt ping
-        jf rt build-collect-env ${{ env.JFROG_CLI_BUILD_NAME }} ${{ env.JFROG_CLI_BUILD_NUMBER }}
-        jf rt build-add-dependencies ${{ env.JFROG_CLI_BUILD_NAME }} ${{ env.JFROG_CLI_BUILD_NUMBER }}  ./
-        jf rt build-add-git ${{ env.JFROG_CLI_BUILD_NAME }} ${{ env.JFROG_CLI_BUILD_NUMBER }}
+        jf rt build-collect-env $GITHUB_WORKFLOW $GITHUB_RUN_NUMBER
+        jf rt build-add-dependencies $GITHUB_WORKFLOW $GITHUB_RUN_NUMBER  ./
+        jf rt build-add-git $GITHUB_WORKFLOW $GITHUB_RUN_NUMBER
         
     - name: Deploy
       run: |
@@ -55,7 +55,7 @@ jobs:
         
     - name: Publish
       run: |
-        jf rt build-publish ${{ env.JFROG_CLI_BUILD_NAME }} ${{ env.JFROG_CLI_BUILD_NUMBER }}
+        jf rt build-publish $GITHUB_WORKFLOW $GITHUB_RUN_NUMBER
         
         
         
