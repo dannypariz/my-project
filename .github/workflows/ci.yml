@@ -45,9 +45,9 @@ jobs:
     - name: Collect
       run: |
         jf rt ping
-        jf rt build-collect-env githubactions 2
-        jf rt build-add-dependencies githubactions 2  ./
-        jf rt build-add-git githubactions 2
+        jf rt build-collect-env
+        jf rt build-add-dependencies  ./
+        jf rt build-add-git
         
     - name: Deploy
       run: |
@@ -55,7 +55,7 @@ jobs:
         
     - name: Publish
       run: |
-        jf rt build-publish githubactions 2
+        jf rt build-publish
         
         
         
