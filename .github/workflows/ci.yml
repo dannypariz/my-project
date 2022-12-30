@@ -42,4 +42,9 @@ jobs:
         JF_USER: ${{ secrets.JF_USER }}
         JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
-    - run: jf rt ping
+    - run: |
+        jf rt ping
+        jf rt build-collect-env githubactions 1
+        jf rt build-add-dependencies githubactions 1 ./
+        jf rt build-add-git githubactions 1
+        jf rt build-publish githubactions 1
